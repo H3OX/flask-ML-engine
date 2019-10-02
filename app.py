@@ -10,10 +10,10 @@ def predict():
     if request.method == 'POST':
         data = request.get_json(force=True)
         prediction = model.predict(np.array([data['params']]).tolist()).tolist()
-        output = prediction
+        output = prediction[0]
         return jsonify(output)
     else:
-        return jsonify(err = 'err')
+        return jsonify(err = 'Only POST allowed')
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
